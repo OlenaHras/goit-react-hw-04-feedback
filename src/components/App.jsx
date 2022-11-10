@@ -14,12 +14,14 @@ export default function App() {
   const [positivePercentage, setPositivePercentage] = useState(0);
 
   useEffect(() => {
-    setTotal(() => {
-      return good + neutral + bad;
-    });
-    setPositivePercentage(() => {
-      return Math.round((good / (good + neutral + bad)) * 100);
-    });
+    if (good ?? neutral ?? bad) {
+      setTotal(() => {
+        return good + neutral + bad;
+      });
+      setPositivePercentage(() => {
+        return Math.round((good / (good + neutral + bad)) * 100);
+      });
+    }
   }, [good, neutral, bad]);
 
   const onLeaveFeedback = e => {
